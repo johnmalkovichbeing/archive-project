@@ -1,0 +1,114 @@
+.film-strip {
+  position: relative;
+  width: 100%;
+  min-height: 132px;
+  padding: 23px 22px 18px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035), transparent 18%, rgba(0, 0, 0, 0.32)),
+    #1c1a16;
+  border: 1px solid rgba(240, 237, 232, 0.08);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 0 22px rgba(0, 0, 0, 0.65),
+    0 22px 45px rgba(0, 0, 0, 0.28);
+}
+
+.film-strip::before,
+.film-strip::after {
+  position: absolute;
+  right: 16px;
+  left: 16px;
+  height: 12px;
+  pointer-events: none;
+  content: '';
+  background-image: radial-gradient(circle, #0a0a0a 0 5px, transparent 5.5px);
+  background-repeat: repeat-x;
+  background-size: 18px 12px;
+  filter: drop-shadow(0 0 0 #2a2620);
+}
+
+.film-strip::before {
+  top: 5px;
+}
+
+.film-strip::after {
+  bottom: 5px;
+}
+
+.film-frames {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0 1px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(240, 237, 232, 0.22) transparent;
+}
+
+.film-frames::-webkit-scrollbar {
+  height: 3px;
+}
+
+.film-frames::-webkit-scrollbar-thumb {
+  background: rgba(240, 237, 232, 0.2);
+}
+
+.film-frameButton {
+  flex: 0 0 auto;
+  display: grid;
+  gap: 7px;
+  width: 90px;
+  padding: 5px;
+  color: rgba(240, 237, 232, 0.62);
+  text-align: left;
+  background: rgba(10, 10, 10, 0.26);
+  border: 1px solid rgba(240, 237, 232, 0.07);
+  border-radius: 5px;
+  cursor: pointer;
+  transition:
+    border-color 200ms ease,
+    background 200ms ease;
+}
+
+.film-frameButton:hover {
+  background: rgba(10, 10, 10, 0.42);
+  border-color: var(--frame-accent);
+}
+
+.film-frameImage {
+  position: relative;
+  display: grid;
+  width: 80px;
+  height: 60px;
+  overflow: hidden;
+  place-items: center;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(240, 237, 232, 0.08);
+}
+
+.film-frameImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.film-frameImage > span {
+  color: rgba(10, 10, 10, 0.42);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.film-frameLabel {
+  overflow: hidden;
+  color: rgba(240, 237, 232, 0.52);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

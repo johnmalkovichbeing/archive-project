@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --background: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: rgba(240, 237, 232, 0.5);
+  --film-material: #1c1a16;
+  --lightbox-surface: #dde8f4;
+  --amber: #e8c4a0;
+  --serif: 'EB Garamond', Georgia, serif;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  color: var(--text-primary);
+  background: var(--background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 1024px;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(240, 237, 232, 0.035), transparent 28%),
+    radial-gradient(circle at 80% 80%, rgba(232, 196, 160, 0.04), transparent 30%),
+    var(--background);
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--background);
+}
+
+::selection {
+  color: #0a0a0a;
+  background: var(--amber);
+}
