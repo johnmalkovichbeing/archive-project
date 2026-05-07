@@ -8,18 +8,20 @@
   height: 100vh;
   overflow: hidden;
 
-  background-color: #ffffff;
-  background-image: url('/topview-bg.png');
+  background-color: #fff;
+  background-image: url("/topview-bg.png");
   background-size: 100vw auto;
   background-position: 50% 20%;
   background-repeat: no-repeat;
 }
+
 @media (max-width: 768px) {
   .top-view {
     background-size: 260vw auto;
     background-position: 50% 18%;
   }
 }
+
 
 /* =========================
    DOSSIER BACKGROUND
@@ -38,7 +40,8 @@
 
   pointer-events: none;
   user-select: none;
-  filter: drop-shadow(2 8px 10px rgba(0, 0, 0, 0.8));
+
+  filter: drop-shadow(2px 8px 10px rgba(0, 0, 0, 0.8));
 }
 
 
@@ -48,18 +51,16 @@
 
 .vinyl-binder {
   position: absolute;
+  z-index: 3;
 
   left: 43.5%;
   top: 52%;
 
   width: 76vw;
   max-width: none;
-
   aspect-ratio: 1492 / 1054;
-  transform: translate(-50%, -50%);
-  z-index: 3;
 
-  
+  transform: translate(-50%, -50%);
 }
 
 .vinyl-overlay {
@@ -67,10 +68,10 @@
   inset: 0;
   z-index: 1;
 
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  display: block;
 
   pointer-events: none;
   user-select: none;
@@ -94,8 +95,8 @@
   box-sizing: border-box;
 }
 
-.pocket-page-left {
-  left: 7.1%;
+.pocket-page-left,
+.pocket-page-right {
   top: 8.6%;
 
   width: 41%;
@@ -103,44 +104,39 @@
 
   column-gap: 6%;
   row-gap: 4%;
+}
+
+.pocket-page-left {
+  left: 7.1%;
 }
 
 .pocket-page-right {
   left: 51.2%;
-  top: 8.6%;
-
-  width: 41%;
-  height: 83%;
-
-  column-gap: 6%;
-  row-gap: 4%;
 }
 
 
 /* =========================
-   POCKET CELL
+   POCKET CELLS
    ========================= */
 
 .pocket-cell {
   position: relative;
   overflow: visible;
+  isolation: isolate;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  isolation: isolate;
 }
 
 .pocket-photo {
   position: relative;
   z-index: 1;
 
+  display: block;
   width: 109%;
   height: 105%;
-
   object-fit: contain;
-  display: block;
 
   opacity: 1;
   filter: none;
@@ -149,15 +145,17 @@
   user-select: none;
 }
 
-
-/* 각 칸 위에 덮인 비닐 반사광 */
-.pocket-cell::before {
+.pocket-cell::before,
+.pocket-cell::after {
   content: "";
   position: absolute;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.pocket-cell::before {
   inset: -3%;
   z-index: 3;
-
-  pointer-events: none;
 
   background:
     linear-gradient(
@@ -170,31 +168,24 @@
     ),
     radial-gradient(
       ellipse at 22% 18%,
-      rgba(255, 255, 255, 0.10) 0%,
+      rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0.035) 28%,
       rgba(255, 255, 255, 0) 58%
     ),
     repeating-linear-gradient(
       76deg,
-      rgba(255, 255, 255, 0.02) 0px,
+      rgba(255, 255, 255, 0.02) 0,
       rgba(255, 255, 255, 0.02) 1px,
       rgba(255, 255, 255, 0) 2px,
       rgba(255, 255, 255, 0) 8px
     );
 
-  mix-blend-mode: screen;
   opacity: 0.42;
 }
 
-
-/* 비닐 포켓 가장자리 / 봉합선 느낌 */
 .pocket-cell::after {
-  content: "";
-  position: absolute;
   inset: -2.5%;
   z-index: 4;
-
-  pointer-events: none;
 
   border: 1px solid rgba(255, 255, 255, 0.16);
 
@@ -218,12 +209,9 @@
     inset 0 0 0.45vw rgba(255, 255, 255, 0.05),
     inset 0 0.08vw 0.22vw rgba(255, 255, 255, 0.08);
 
-  mix-blend-mode: screen;
   opacity: 0.36;
 }
 
-
-/* 칸마다 반사 느낌 조금씩 다르게 */
 .pocket-cell:nth-child(3n + 1)::before {
   opacity: 1;
   transform: rotate(-1deg);
@@ -269,8 +257,8 @@
   font-size: 5vw;
   font-weight: 100;
   line-height: 1;
+  color: #fff;
 
-  color: #ffffff;
   cursor: pointer;
   user-select: none;
 }
@@ -280,7 +268,7 @@
 }
 
 .page-arrow-right {
-  right:17.6vw;
+  right: 17.6vw;
 }
 
 .page-arrow:hover {
@@ -296,26 +284,25 @@
   position: absolute;
   left: 2%;
   top: -3%;
-
   z-index: 10;
 
   display: flex;
   align-items: flex-end;
-  gap: 0vw;
+  gap: 0;
 }
 
 .index-tab {
-  border: 0;
-  padding: 0;
-  margin: 0;
-  background: transparent;
-  cursor: pointer;
-
   --tab-x: 0vw;
   --tab-y: 0vw;
-
   --active-x: 0vw;
   --active-y: 0vw;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  cursor: pointer;
 
   transform: translate(
     calc(var(--tab-x) + var(--active-x)),
@@ -323,13 +310,6 @@
   );
 
   transition: transform 180ms ease;
-}
-
-.index-tab:hover {
-  transform: translate(
-    calc(var(--tab-x) + var(--active-x)),
-    calc(var(--tab-y) + var(--active-y))
-  );
 }
 
 .index-tab img {
@@ -340,26 +320,51 @@
   pointer-events: none;
   user-select: none;
 
-  transition: filter 180ms ease, -webkit-mask-image 180ms ease, mask-image 180ms ease;
+  transition:
+    filter 180ms ease,
+    -webkit-mask-image 180ms ease,
+    mask-image 180ms ease;
 }
 
-/* 비활성 탭 - 개별 mask */
-.index-tab-typographie:not(.is-active) img  { -webkit-mask-image: linear-gradient(to bottom, black 45%, transparent 65%); mask-image: linear-gradient(to bottom, black 57%, transparent 60%); }
-.index-tab-couleur:not(.is-active) img      { -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 73%); mask-image: linear-gradient(to bottom, black 63%, transparent 68%); }
-.index-tab-texture:not(.is-active) img      { -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 73%); mask-image: linear-gradient(to bottom, black 64%, transparent 69%); }
-.index-tab-composition:not(.is-active) img  { -webkit-mask-image: linear-gradient(to bottom, black 57%, transparent 75%); mask-image: linear-gradient(to bottom, black 63%, transparent 68%); }
-.index-tab-all:not(.is-active) img          { -webkit-mask-image: linear-gradient(to right, black 65%, transparent 82%); mask-image: linear-gradient(to right, black 65%, transparent 82%); }
-
-/* 활성 탭 - mask 거의 없음 */
 .index-tab.is-active img {
-  -webkit-mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 92%, transparent 100%);
   filter: brightness(1) saturate(0.7);
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 .index-tab.is-active:not(.index-tab-all) {
   --active-x: var(--active-tab-x);
   --active-y: var(--active-tab-y);
+}
+
+
+/* =========================
+   INDEX TAB MASKS
+   ========================= */
+
+.index-tab-typographie:not(.is-active) img {
+  -webkit-mask-image: linear-gradient(to bottom, black 45%, transparent 65%);
+  mask-image: linear-gradient(to bottom, black 57%, transparent 60%);
+}
+
+.index-tab-couleur:not(.is-active) img {
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 73%);
+  mask-image: linear-gradient(to bottom, black 63%, transparent 68%);
+}
+
+.index-tab-texture:not(.is-active) img {
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 73%);
+  mask-image: linear-gradient(to bottom, black 64%, transparent 69%);
+}
+
+.index-tab-composition:not(.is-active) img {
+  -webkit-mask-image: linear-gradient(to bottom, black 57%, transparent 75%);
+  mask-image: linear-gradient(to bottom, black 63%, transparent 68%);
+}
+
+.index-tab-all:not(.is-active) img {
+  -webkit-mask-image: linear-gradient(to right, black 65%, transparent 82%);
+  mask-image: linear-gradient(to right, black 65%, transparent 82%);
 }
 
 
@@ -375,6 +380,7 @@
 .index-tab-all img {
   width: 3vw;
   height: auto;
+
   filter: brightness(1) saturate(0.7);
 }
 
@@ -421,14 +427,6 @@
 }
 
 
-/* 클릭된 탭 색감 조절 */
-.index-tab.is-active img {
-  filter: brightness(1) saturate(0.7);
-  -webkit-mask-image: none;
-  mask-image: none;
-}
-
-
 /* =========================
    CARD STACK BUTTON
    ========================= */
@@ -437,20 +435,23 @@
   position: absolute;
   right: -12%;
   top: 74%;
-  transform: translateY(-50%);
   z-index: 10;
+
+  width: 13.7vw;
+  overflow: visible;
+
+  transform: translateY(-50%);
 
   border: 0;
   padding: 0;
   background: transparent;
+
   cursor: pointer;
-
-  width: 13.7vw;
-  transition: transform 200ms ease, opacity 200ms ease;
-
   pointer-events: none;
 
-  overflow: visible;
+  transition:
+    transform 200ms ease,
+    opacity 200ms ease;
 }
 
 .card-stack-btn:hover {
@@ -459,27 +460,31 @@
 }
 
 .card-stack-btn img {
+  display: block;
   width: 160%;
   height: auto;
-  display: block;
+
   transform: rotate(7deg);
+
   pointer-events: none;
+
   filter: drop-shadow(7px 9px 17px rgba(0, 0, 0, 0.6));
-  /* 왼쪽(-6px)이나 아래(6px) 방향으로만 - 화면 안쪽으로 */
 }
 
 .card-stack-btn::after {
   content: "";
   position: absolute;
+
   top: 18%;
   left: 35%;
+
   width: 90%;
   height: 65%;
-  cursor: pointer;
-  pointer-events: auto;
+
   transform: rotate(7deg);
 
-  /* background: rgba(255, 0, 0, 0.5);  /* 확인 필요시 주석 해제 */
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 
@@ -487,18 +492,29 @@
    RANDOM DRAW OVERLAY
    ========================= */
 
-.random-overlay {
+.random-overlay,
+.zoom-overlay {
   position: fixed;
   inset: 0;
-  z-index: 100;
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.random-overlay-bg {
+.random-overlay {
+  z-index: 100;
+}
+
+.zoom-overlay {
+  z-index: 200;
+}
+
+.random-overlay-bg,
+.zoom-overlay-bg {
   position: absolute;
   inset: 0;
+
   background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(4px);
 }
@@ -506,10 +522,11 @@
 .random-cards-row {
   position: relative;
   z-index: 1;
+
   display: flex;
   flex-direction: row;
-  gap: 2vw;
   align-items: flex-start;
+  gap: 2vw;
 }
 
 .random-card-item {
@@ -523,32 +540,21 @@
   width: 16vw;
   height: auto;
   object-fit: contain;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
+
   background: #fff;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
+}
+
+.random-card-category,
+.zoom-categories {
+  font-family: Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
 }
 
 .random-card-category {
   font-size: 0.7vw;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: #888;
-  font-family: Helvetica, Arial, sans-serif;
-}
-
-.random-close-btn {
-  position: absolute;
-  top: -2vw;
-  right: -2vw;
-  border: 0;
-  background: transparent;
-  font-size: 2vw;
-  cursor: pointer;
-  color: #333;
-  line-height: 1;
-}
-
-.random-close-btn:hover {
-  opacity: 0.5;
 }
 
 
@@ -556,25 +562,10 @@
    ZOOM OVERLAY
    ========================= */
 
-.zoom-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.zoom-overlay-bg {
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(4px);
-}
-
 .zoom-content {
   position: relative;
   z-index: 1;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -585,30 +576,39 @@
   max-width: 50vw;
   max-height: 75vh;
   object-fit: contain;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+
   background: #fff;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
 }
 
 .zoom-categories {
   font-size: 0.75vw;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
   color: #999;
-  font-family: Helvetica, Arial, sans-serif;
 }
 
+
+/* =========================
+   CLOSE BUTTONS
+   ========================= */
+
+.random-close-btn,
 .zoom-close-btn {
   position: absolute;
   top: -2vw;
   right: -2vw;
+
   border: 0;
   background: transparent;
+
   font-size: 2vw;
-  cursor: pointer;
-  color: #333;
   line-height: 1;
+  color: #333;
+
+  cursor: pointer;
 }
 
+.random-close-btn:hover,
 .zoom-close-btn:hover {
   opacity: 0.5;
 }
