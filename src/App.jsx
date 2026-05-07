@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';  // useEffect 추가
+import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { images } from './data/images';
 import EntryView from './components/EntryView';
@@ -16,6 +16,7 @@ function makeLightboxPosition(index) {
     { x: 62, y: 46 },
     { x: 39, y: 66 },
   ];
+
   return positions[index % positions.length];
 }
 
@@ -26,21 +27,10 @@ export default function App() {
   const [selectedImages, setSelectedImages] = useState([]);
   const [showPoster, setShowPoster] = useState(false);
 
-  // ↓ 여기 추가
-  useEffect(() => {
-  function scaleToFit() {
-  const scaleX = window.innerWidth / 1440;
-  const scaleY = window.innerHeight / 900;
-  const scale = Math.min(scaleX, scaleY);
-  document.documentElement.style.setProperty('--app-scale', scale);
-}
-    scaleToFit();
-    window.addEventListener('resize', scaleToFit);
-    return () => window.removeEventListener('resize', scaleToFit);
-  }, []);
-  // ↑ 여기까지
+  function handleEnterArchive() {
+    setPhase('topview');
+  }
 
-  function handleEnterArchive() { setPhase('topview'); }
   function handleBackToEntry() {
     setShowPoster(false);
     setActiveFilmRoll(null);
@@ -48,15 +38,32 @@ export default function App() {
     setSelectedImages([]);
     setPhase('entry');
   }
+
   function handleCategoryChange(category) {
     setSelectedCategory(category);
-    if (category === null) return;
-    if (activeFilmRoll && activeFilmRoll !== category) setActiveFilmRoll(category);
+
+    if (category === null) {
+      return;
+    }
+
+    if (activeFilmRoll && activeFilmRoll !== category) {
+      setActiveFilmRoll(category);
+    }
   }
+
   function handleFrameClick(image) {
     setSelectedImages((current) => {
-      if (current.length >= 5 || current.some((item) => item.id === image.id)) return current;
-      return [...current, { ...image, lightboxPosition: makeLightboxPosition(current.length) }];
+      if (current.length >= 5 || current.some((item) => item.id === image.id)) {
+        return current;
+      }
+
+      return [
+        ...current,
+        {
+          ...image,
+          lightboxPosition: makeLightboxPosition(current.length),
+        },
+      ];
     });
   }
 
@@ -85,3 +92,4 @@ export default function App() {
     </main>
   );
 }
+

@@ -14,7 +14,12 @@
   background-position: 50% 24%;
   background-repeat: no-repeat;
 }
-
+@media (max-width: 768px) {
+  .top-view {
+    background-size: 260vw auto;
+    background-position: 50% 18%;
+  }
+}
 
 /* =========================
    DOSSIER BACKGROUND
