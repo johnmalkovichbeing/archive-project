@@ -11,7 +11,7 @@
   background-color: #ffffff;
   background-image: url('/topview-bg.png');
   background-size: 100vw auto;
-  background-position: 50% 24%;
+  background-position: 50% 20%;
   background-repeat: no-repeat;
 }
 @media (max-width: 768px) {
@@ -106,14 +106,14 @@
 }
 
 .pocket-page-right {
-  left: 53.9%;
-  top: 7%;
+  left: 51.2%;
+  top: 8.6%;
 
-  width: 43%;
-  height: 87%;
+  width: 41%;
+  height: 83%;
 
-  column-gap: 5.5%;
-  row-gap: 5%;
+  column-gap: 6%;
+  row-gap: 4%;
 }
 
 
@@ -267,7 +267,7 @@
 
   font-family: Helvetica, Arial, sans-serif;
   font-size: 5vw;
-  font-weight: 300;
+  font-weight: 100;
   line-height: 1;
 
   color: #ffffff;
@@ -276,11 +276,11 @@
 }
 
 .page-arrow-left {
-  left: 3vw;
+  left: 4.5vw;
 }
 
 .page-arrow-right {
-  right:15.3vw;
+  right:17.6vw;
 }
 
 .page-arrow:hover {
@@ -348,7 +348,7 @@
 .index-tab-couleur:not(.is-active) img      { -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 73%); mask-image: linear-gradient(to bottom, black 63%, transparent 68%); }
 .index-tab-texture:not(.is-active) img      { -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 73%); mask-image: linear-gradient(to bottom, black 64%, transparent 69%); }
 .index-tab-composition:not(.is-active) img  { -webkit-mask-image: linear-gradient(to bottom, black 57%, transparent 75%); mask-image: linear-gradient(to bottom, black 63%, transparent 68%); }
-.index-tab-all:not(.is-active) img          { -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 82%); mask-image: linear-gradient(to bottom, black 65%, transparent 82%); }
+.index-tab-all:not(.is-active) img          { -webkit-mask-image: linear-gradient(to right, black 65%, transparent 82%); mask-image: linear-gradient(to right, black 65%, transparent 82%); }
 
 /* 활성 탭 - mask 거의 없음 */
 .index-tab.is-active img {
@@ -373,12 +373,13 @@
 }
 
 .index-tab-all img {
-  width: 2.5vw;
+  width: 3vw;
   height: auto;
+  filter: brightness(1) saturate(0.7);
 }
 
 .index-tab-all.is-active {
-  --active-x: 0.7vw;
+  --active-x: 0.2vw;
   --active-y: 0vw;
 }
 
@@ -389,40 +390,42 @@
 
 .index-tab-typographie {
   --tab-x: 0vw;
-  --tab-y: 0.4vw;
+  --tab-y: -1.15vw;
 
   --active-tab-x: 0vw;
-  --active-tab-y: 0.5vw;
+  --active-tab-y: 0.4vw;
 }
 
 .index-tab-couleur {
   --tab-x: -1vw;
-  --tab-y: -0.1vw;
+  --tab-y: -1.6vw;
 
   --active-tab-x: 0vw;
-  --active-tab-y: 0.5vw;
+  --active-tab-y: 0.4vw;
 }
 
 .index-tab-texture {
   --tab-x: -2vw;
-  --tab-y: -0.15vw;
+  --tab-y: -1.65vw;
 
   --active-tab-x: 0vw;
-  --active-tab-y: 0.5vw;
+  --active-tab-y: 0.4vw;
 }
 
 .index-tab-composition {
   --tab-x: -3vw;
-  --tab-y: 0vw;
+  --tab-y: -1.5vw;
 
   --active-tab-x: 0vw;
-  --active-tab-y: 0.5vw;
+  --active-tab-y: 0.4vw;
 }
 
 
 /* 클릭된 탭 색감 조절 */
 .index-tab.is-active img {
   filter: brightness(1) saturate(0.7);
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 
